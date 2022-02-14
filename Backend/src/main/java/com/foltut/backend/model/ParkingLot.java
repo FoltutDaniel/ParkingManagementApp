@@ -1,4 +1,4 @@
-package com.foltut.backend.entity;
+package com.foltut.backend.model;
 
 import javax.persistence.*;
 import java.util.List;
