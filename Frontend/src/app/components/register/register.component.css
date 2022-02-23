@@ -1,0 +1,62 @@
+
+.form-container{
+    position: absolute;
+    width: 25%;
+    height: 70%;
+    left: 37.5%;
+    top: 15%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.login-input{
+    font-size: 1em;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #938e94;
+    font-weight: 500;
+}
+
+.login-input-container{
+    display: block;
+    position: relative;
+    top: 5%;
+    left: 15%;
+    width: 70%;
+    height: 10%;
+    margin-bottom: 1%;
+}
+
+.login-label{
+    font-size: 1.2em;
+    color: #403e3c;
+}
+
+.login-button{
+    display: block;
+    position: relative;
+    top: 10%;
+    left: 18%;
+    margin-top: 5%;
+    width: 65%;
+    height: 8%;
+    border: none;
+    border-radius: 5px;
+    color: #d7cfcf;
+    background-color: #687082;
+    font-size: 1.6em;
+    font-weight: 300;
+}
+
+.login-button:hover{
+    background-color: #d7cfcf;
+    color: #687082;
+
+}
+
+.app-logo{
+    position: relative;
+    width: 35%;
+    height: 22%;
+    left: 32.5%;
+}
