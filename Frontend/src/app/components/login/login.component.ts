@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     loginData = this.loginForm.value;
     this.authService.login(loginData).subscribe(
       (res)=>{
-        this.router.navigateByUrl('/main');
+        this.router.navigateByUrl('/');
       },
       (err)=>{
         alert(`Login failed`);

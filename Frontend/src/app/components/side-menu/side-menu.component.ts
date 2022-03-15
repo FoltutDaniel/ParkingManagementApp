@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'side-menu',
@@ -10,12 +11,20 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class SideMenuComponent {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  username: string = 'John Doe';
+  toggled: boolean = false;
+  constructor() {}
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  toggleSideNav(){
+      this.toggled = !this.toggled;
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
 
+      sidebar?.classList.toggle('sidebar_small');
+      mainContent?.classList.toggle('main-content_large');
+   
+  }
+
+
+ 
 }

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +15,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { ParkViewComponent } from './components/park-view/park-view.component';
+import { ParkingComponent } from './components/parking/parking.component';
+import { HomeComponent } from './components/home/home.component';
 
 const material = [
   MatSidenavModule
@@ -26,9 +32,11 @@ const material = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MainPageComponent,
     HeaderComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    ParkViewComponent,
+    ParkingComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +51,8 @@ const material = [
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    FontAwesomeModule
   ],
   exports: [
     material
@@ -51,4 +60,6 @@ const material = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+ }

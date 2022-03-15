@@ -1,28 +1,20 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar style="min-width: 40px;">Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Frontend</span>
-    </mat-toolbar>
+<div class="grid-container">
+    <div class="sidebar">
+      <button (click)="toggleSideNav()"><i class="fa-solid fa-bars nav-icon"></i></button>
+      <p class="user" [hidden]="toggled"><i class="fa-solid fa-user"></i> {{username}}</p>
+      <ul id="nav-options-list">
+        <li class="nav-option"><a routerLink="/"><i class="fa-solid fa-house nav-icon"></i><span [hidden]="toggled"> Home</span></a></li>
+        <li class="nav-option"><a routerLink="/parking-view"><i class="fa-solid fa-square-parking nav-icon"></i><span [hidden]="toggled"> Parking</span></a></li>
+        <li class="nav-option"><a routerLink="*"><i class="fa-solid fa-suitcase nav-icon"></i><span [hidden]="toggled"> Subscriptions</span></a></li>
+        <li class="nav-option"><a routerLink="*"><i class="fa-solid fa-bars-progress nav-icon"></i><span [hidden]="toggled"> Manage Account</span></a></li>
+        <li class="nav-option"><a routerLink="*"><i class="fa-solid fa-gear nav-icon"></i><span [hidden]="toggled"> Settings</span></a></li>
+        <li class="nav-option"><a routerLink="*"><i class="fa-solid fa-right-from-bracket nav-icon"></i><span [hidden]="toggled"> Logout</span></a></li>
+        
+        
 
-    <!-- Add Content Here -->
-  </mat-sidenav-content>
-</mat-sidenav-container>
+      </ul>
+    </div>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>

@@ -1,18 +1,105 @@
-.sidenav-container {
+.grid-container {
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  display: flex;
+  position: absolute;
+  left: 0;
+  transition: 0.1s ease;
+}
+
+.sidebar {
+  width: 20%;
   height: 100%;
+  background-color: #2f3136;
+  transition: .1s ease-out;
+  position: relative;
 }
 
-.sidenav {
-  width: 200px;
+.main-content {
+  width: 80%;
+  height: 100%;
+  background-color: #ccc;
+  transition: .1s ease;
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
-  min-width: 100px;
+.main-content_large {
+  width: 95%;
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
+.sidebar_small {
+  width: 5%;
+}
+
+button {
+  position: absolute;
+  border: none;
+  height: 40px;
+  width: 40px;
+  right: 0px;
   top: 0;
-  z-index: 1;
+  transform: translateX(-50%);
+  cursor: pointer;
+  color: white;
+  background-color: #2f3136;
 }
+
+.app-logo{
+  position: relative;
+  width: 40%;
+  height: 22%;
+  left: 30%;
+}
+
+#nav-options-list{
+  list-style: none;
+  color: #f6f6f6;
+  margin-top: 70px;
+  padding: 0;
+  transition: 0.3 ease-out;
+}
+
+.nav-option{
+  font-size: 1.3rem;
+  width: 100%;
+  padding: 20px;
+  text-align: left;
+
+}
+
+.nav-option:last-child{
+  position: absolute;
+  bottom: 10px;
+}
+
+.nav-icon{
+  font-size: 2rem;
+}
+
+a{
+  text-decoration: none;
+  color: #f6f6f6;
+}
+
+.welcome-message{
+  position: absolute;
+  text-align: center;
+  font-size: 1.5rem;
+  left: 0;
+  color: #f6f6f6;
+}
+
+.nav-option:hover{
+  background-color: #393c42;
+}
+
+.user{
+  margin-top: 20%;
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: #292b2f;
+  color: #f6f6f6;
+  width: 100%;
+  padding: 7%;
+}
+
