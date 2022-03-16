@@ -21,6 +21,7 @@
   height: 100%;
   background-color: #ccc;
   transition: .1s ease;
+  overflow-y: scroll;
 }
 
 .main-content_large {

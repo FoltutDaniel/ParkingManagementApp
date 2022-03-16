@@ -12,6 +12,12 @@ public class ParkingLot {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "latitude")
     private String latitude;
 

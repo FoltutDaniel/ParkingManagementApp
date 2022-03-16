@@ -26,7 +26,11 @@ export class LoginComponent implements OnInit {
     loginData = this.loginForm.value;
     this.authService.login(loginData).subscribe(
       (res)=>{
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/home').then(
+          () => {
+            window.location.reload();
+          }
+        );
       },
       (err)=>{
         alert(`Login failed`);

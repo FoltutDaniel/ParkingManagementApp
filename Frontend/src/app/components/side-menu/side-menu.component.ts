@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -9,11 +9,15 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.css']
 })
-export class SideMenuComponent {
+export class SideMenuComponent implements OnInit{
 
   username: string = 'John Doe';
   toggled: boolean = false;
   constructor() {}
+
+  ngOnInit(){
+
+  }
 
   toggleSideNav(){
       this.toggled = !this.toggled;

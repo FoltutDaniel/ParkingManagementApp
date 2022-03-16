@@ -1,1 +1,15 @@
-<p>parking works!</p>
+<div class="parking" style="background-color: {{color}};">
+    <h2 class="parking-name">Parking Name</h2>
+    <p class="parking-address">Address: Str. Fututa Nr. 13 Cluj-Napoca</p>
+    <p class="parking-address">Max capacity: 220</p>
+    <p class="parking-capacity" style="font-size: 1.5em;">Remaining parking spots: {{parkingSpots}}</p>
+    <div class="map-container">
+        <app-map id="{{Id}}" [Id]='this.Id' [latitude]="46.7742" [longitutde]="23.5939">
+
+        </app-map>
+    </div>
+</div>
+
+<script>
+    
+</script>

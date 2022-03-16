@@ -22,6 +22,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { ParkViewComponent } from './components/park-view/park-view.component';
 import { ParkingComponent } from './components/parking/parking.component';
 import { HomeComponent } from './components/home/home.component';
+import { MapComponent } from './components/map/map.component';
+
 
 const material = [
   MatSidenavModule
@@ -36,7 +38,8 @@ const material = [
     SideMenuComponent,
     ParkViewComponent,
     ParkingComponent,
-    HomeComponent
+    HomeComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ const material = [
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    
   ],
   exports: [
     material

@@ -1,0 +1,39 @@
+.parking{
+    position: relative;
+
+    height: 40vh;
+    width: 60vw;
+    margin-top: 30px;
+
+    background-color: #4c705a;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    border-radius: 5px;
+
+    
+    color: #f6f6f6;
+    padding: 2%;
+}
+
+
+.parking p{
+    font-size: 1.2em;
+}
+
+.parking-capacity{
+    position: absolute;
+    bottom: 20px;
+    
+}
+
+.parking-name{
+    margin-bottom: 5%;
+}
+
+.map-container{
+    position: absolute;
+    right: 5%;
+    top: 3%;
+    width: 50%;
+    height: 100%;
+
+}
