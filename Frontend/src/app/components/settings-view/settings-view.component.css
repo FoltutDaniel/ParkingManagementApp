@@ -1,0 +1,28 @@
+.option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    margin-top: 2%;
+    margin-left: 4%;
+
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+
+    color: #f6f6f6;
+    font-size: 1.7em;
+
+    background-color: #2f3136;
+    cursor: pointer;
+}
+
+.option:hover{
+    background-color: #393c42;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+}

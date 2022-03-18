@@ -1,0 +1,32 @@
+<div class="car-info-container">
+    <div class="car-plate">
+        <h2>BH 08 JCC</h2>
+    </div>
+    <div class="status" *ngIf="parked">
+        Status: Parked <i class="fa-solid fa-circle" style="color: green; font-size: 1em;"></i>
+    </div>
+
+    <div class="status" *ngIf="!parked">
+        Status: Away <i class="fa-solid fa-circle" style="color: red; font-size: 1em;"></i>
+    </div>
+
+    <div class="time-parked" *ngIf="parked">
+        Parked for: 23 Hrs 32 Mins
+    </div>
+
+    <div class="time-parked" *ngIf="!parked">
+        Away for: 23 Hrs 32 Mins
+    </div>
+
+    <div class="parking-lot">
+        Parking Lot: Parking Name
+    </div>
+
+    <div class="subscription">
+        Subscription expiration date: 18.03.2022
+    </div>
+
+    <div class="brand">
+        <img class="app-logo" src="assets/images/{{brand}}.png">
+    </div>
+</div>

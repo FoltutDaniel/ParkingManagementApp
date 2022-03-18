@@ -21,8 +21,17 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { ParkViewComponent } from './components/park-view/park-view.component';
 import { ParkingComponent } from './components/parking/parking.component';
-import { HomeComponent } from './components/home/home.component';
 import { MapComponent } from './components/map/map.component';
+import { HomeViewComponent } from './components/home-view/home-view.component';
+import { CarComponent } from './components/car/car.component';
+import { SubscriptionViewComponent } from './components/subscription-view/subscription-view.component';
+import { ManageAccountViewComponent } from './components/manage-account-view/manage-account-view.component';
+import { SettingsViewComponent } from './components/settings-view/settings-view.component';
+import { AddCarComponent } from './components/add-car/add-car.component';
+import { RemoveCarComponent } from './components/remove-car/remove-car.component';
+import { ParkingLogsViewComponent } from './components/parking-logs-view/parking-logs-view.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ChangeEmailComponent } from './components/change-email/change-email.component';
 
 
 const material = [
@@ -38,8 +47,17 @@ const material = [
     SideMenuComponent,
     ParkViewComponent,
     ParkingComponent,
-    HomeComponent,
-    MapComponent
+    MapComponent,
+    HomeViewComponent,
+    CarComponent,
+    SubscriptionViewComponent,
+    ManageAccountViewComponent,
+    SettingsViewComponent,
+    AddCarComponent,
+    RemoveCarComponent,
+    ParkingLogsViewComponent,
+    ChangePasswordComponent,
+    ChangeEmailComponent
   ],
   imports: [
     BrowserModule,
