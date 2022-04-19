@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RemoveCarComponent implements OnInit {
 
+  numberPlates: String[] = [
+    'BH 08 JCC',
+    'BH 09 FFE'
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getData(){
+    let numberPlate = (document.getElementById('plate') as HTMLInputElement).value;
+    let brand = (document.getElementById('brand') as HTMLInputElement).value;
+
+    console.log(numberPlate + '  ' + brand);
   }
 
 }

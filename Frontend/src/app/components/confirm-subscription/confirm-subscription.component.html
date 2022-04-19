@@ -1,0 +1,31 @@
+<div class="data-container">
+    <div class="subscription">
+        <div class="subscription-info">
+            <h2 class="subscription-title">
+                Parking subscription
+            </h2>
+            <p class="subscription-period">
+                Subscription period: 3 months
+            </p>
+            <div class="start-date">
+                <label class="start-date-label" for="dateofbirth">Start date:</label>
+                <input class="start-date-picker" type="date" name="dateofbirth" id="dateofbirth">
+            </div>
+            <label for="car">Select car for subscription: </label>
+            <select name="car" id="car" class="car-plate-dropdown">
+                <option *ngFor="let plate of carPlates" value="{{plate}}">
+                    {{plate}}
+                </option>
+            </select>
+        </div>
+        
+    </div>
+</div>
+<div class="confirm-container">
+    <p class="price">
+        Price: 100 lei
+    </p>
+    <button class="confirm-subscription-btn">
+        Confirm
+    </button>
+</div>

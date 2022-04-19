@@ -1,1 +1,16 @@
-<p>add-car works!</p>
+<form class="container" (ngSubmit)="getData()">
+    <h1 class="title">Add car</h1>
+    <div class="input-container">
+        <label for="plate">Number plate: </label>
+        <input type="text" name="plate" id="plate">
+    </div>
+    <div class="input-container"> 
+    <label for="brand">Brand: </label>
+        <select name="brand" id="brand">
+            <option *ngFor="let brand of carBrands" value="{{brand}}">
+                {{brand}}
+            </option>
+        </select>
+    </div>
+    <button class="confirm-btn" type="submit">Confirm</button>
+</form>

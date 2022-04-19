@@ -32,10 +32,10 @@ import { RemoveCarComponent } from './components/remove-car/remove-car.component
 import { ParkingLogsViewComponent } from './components/parking-logs-view/parking-logs-view.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ChangeEmailComponent } from './components/change-email/change-email.component';
-
+import { ConfirmSubscriptionComponent } from './components/confirm-subscription/confirm-subscription.component';
 
 const material = [
-  MatSidenavModule
+  MatSidenavModule,
 ]
 
 @NgModule({
@@ -57,7 +57,8 @@ const material = [
     RemoveCarComponent,
     ParkingLogsViewComponent,
     ChangePasswordComponent,
-    ChangeEmailComponent
+    ChangeEmailComponent,
+    ConfirmSubscriptionComponent
   ],
   imports: [
     BrowserModule,

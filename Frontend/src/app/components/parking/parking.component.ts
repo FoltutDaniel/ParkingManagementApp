@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { reduce } from 'rxjs/operators';
 import * as L from 'leaflet';
+import { ParkingLot } from 'src/app/common/parking-lot';
 
 
 @Component({
@@ -11,17 +12,19 @@ import * as L from 'leaflet';
 export class ParkingComponent implements OnInit {
   
   @Input()
-  Id!: number;
+  parkingLot!: ParkingLot;
 
   color: string = 'yellow';
 
-  parkingSpots: number = 20;
+  parkingSpots!: number;
 
 
   constructor() { }
 
   ngOnInit(): void {
-    if(this.Id == 2){
+    this.parkingSpots = this.parkingLot.maxCapacity - this.parkingLot.parkingSpotsOccupied;
+
+    if(this.parkingSpots == 0){
       this.color = '#9d001f';
       this.parkingSpots = 0;
     }else{

@@ -12,4 +12,7 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getData(){
+    
+  }
 }

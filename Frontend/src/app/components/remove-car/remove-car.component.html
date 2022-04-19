@@ -1,1 +1,12 @@
-<p>remove-car works!</p>
+<form class="container" (ngSubmit)="getData()">
+    <h2 class="title">Remove car</h2>
+    <div class="input-container"> 
+    <label for="brand">Number plate: </label>
+        <select name="brand" id="brand">
+            <option *ngFor="let plate of numberPlates" value="{{plate}}">
+                {{plate}}
+            </option>
+        </select>
+    </div>
+    <button class="confirm-btn" type="submit">Confirm</button>
+</form>

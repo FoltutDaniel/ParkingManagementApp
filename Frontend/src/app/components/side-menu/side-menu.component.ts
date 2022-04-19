@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'side-menu',
@@ -13,7 +14,7 @@ export class SideMenuComponent implements OnInit{
 
   username: string = 'John Doe';
   toggled: boolean = false;
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(){
 
@@ -27,6 +28,10 @@ export class SideMenuComponent implements OnInit{
       sidebar?.classList.toggle('sidebar_small');
       mainContent?.classList.toggle('main-content_large');
    
+  }
+
+  logout(){
+    this.auth.logOut();
   }
 
 

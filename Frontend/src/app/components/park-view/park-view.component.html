@@ -1,5 +1,3 @@
 <div class="container">
-    <app-parking id='1' [Id]="1"></app-parking>
-    <app-parking id='2' [Id]="2"></app-parking>
-    <!-- <app-parking id='3' [Id]="3"></app-parking> -->
+    <app-parking *ngFor="let parking of parkingLots" id='{{parking.id}}' [parkingLot]=parking></app-parking>
 </div>

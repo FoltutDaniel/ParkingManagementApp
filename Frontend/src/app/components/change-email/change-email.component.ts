@@ -12,4 +12,7 @@ export class ChangeEmailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getData(){
+    
+  }
 }

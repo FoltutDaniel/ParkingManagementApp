@@ -1,45 +1,49 @@
-package com.foltut.backend.model;
+package com.foltut.backend.dto.ParkingLotDTO;
 
-import javax.persistence.*;
-import java.util.List;
+public class ParkingLotDTO {
 
-@Entity
-@Table(name = "parking_lot")
-public class ParkingLot {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
     private String address;
 
-    @Column(name = "latitude")
     private String latitude;
 
-    @Column(name = "longitude")
     private String longitude;
 
-    @Column(name = "max_capacity")
     private Integer maxCapacity;
 
-    @OneToMany(mappedBy = "parkingLot")
-    private List<Car> cars;
+    private Integer parkingSpotsOccupied;
 
-    public ParkingLot() {
+    public ParkingLotDTO() {
     }
 
-    public ParkingLot(Long id, String name, String address, String latitude, String longitude, Integer maxCapacity) {
+    public ParkingLotDTO(Long id, String name, String address, String latitude, String longitude, Integer maxCapacity, Integer parkingSpotsOccupied) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.maxCapacity = maxCapacity;
+        this.parkingSpotsOccupied = parkingSpotsOccupied;
+    }
+
+    public ParkingLotDTO(Long id, String name, String address, String latitude, String longitude, Integer maxCapacity) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.maxCapacity = maxCapacity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -56,22 +60,6 @@ public class ParkingLot {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public List<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLatitude() {
@@ -96,5 +84,13 @@ public class ParkingLot {
 
     public void setMaxCapacity(Integer maxCapacity) {
         this.maxCapacity = maxCapacity;
+    }
+
+    public Integer getParkingSpotsOccupied() {
+        return parkingSpotsOccupied;
+    }
+
+    public void setParkingSpotsOccupied(Integer parkingSpotsOccupied) {
+        this.parkingSpotsOccupied = parkingSpotsOccupied;
     }
 }
