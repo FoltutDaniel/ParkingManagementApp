@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CarRegister } from 'src/app/common/car-register';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-add-car',
@@ -11,7 +13,7 @@ export class AddCarComponent implements OnInit {
     'BWM', 'Audi', 'Dacia'
   ];
 
-  constructor() { }
+  constructor(private carService: CarService) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +21,15 @@ export class AddCarComponent implements OnInit {
   getData(){
     let numberPlate = (document.getElementById('plate') as HTMLInputElement).value;
     let brand = (document.getElementById('brand') as HTMLInputElement).value;
+    let ownerId = sessionStorage.getItem('userId');
 
-    console.log(numberPlate + '  ' + brand);
+    this.carService.registerCar(new CarRegister(numberPlate, brand, Number(ownerId))).then(
+      (res)=>{
+        alert('Car registered succesfully');
+      },
+      (err) => {
+        alert('Car registration failed!');
+      }
+    );
   }
 }

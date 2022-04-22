@@ -11,11 +11,14 @@ public class Car {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "license_plate_number")
-    private String licensePlateNumber;
+    @Column(name = "license_plate")
+    private String licensePlate;
 
     @Column(name = "parking_status")
     private Boolean parkingStatus;
+
+    @Column(name = "brand")
+    private String brand;
 
     @OneToOne
     @JoinColumn(name = "subscription_id", referencedColumnName = "id")
@@ -32,6 +35,44 @@ public class Car {
     public Car() {
     }
 
+    public Car(String licensePlate, String brand, User owner) {
+        this.licensePlate = licensePlate;
+        this.brand = brand;
+        this.owner = owner;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
+    }
+
+    public void setParkingLot(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     public Long getId() {
         return id;
     }
@@ -40,12 +81,12 @@ public class Car {
         this.id = id;
     }
 
-    public String getLicensePlateNumber() {
-        return licensePlateNumber;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
-    public void setLicensePlateNumber(String licensePlateNumber) {
-        this.licensePlateNumber = licensePlateNumber;
+    public void setLicensePlate(String licensePlateNumber) {
+        this.licensePlate = licensePlateNumber;
     }
 
     public Boolean getParkingStatus() {

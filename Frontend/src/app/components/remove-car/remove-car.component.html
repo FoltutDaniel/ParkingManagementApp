@@ -1,8 +1,8 @@
 <form class="container" (ngSubmit)="getData()">
     <h2 class="title">Remove car</h2>
     <div class="input-container"> 
-    <label for="brand">Number plate: </label>
-        <select name="brand" id="brand">
+    <label for="plate">Number plate: </label>
+        <select name="plate" id="plate">
             <option *ngFor="let plate of numberPlates" value="{{plate}}">
                 {{plate}}
             </option>
