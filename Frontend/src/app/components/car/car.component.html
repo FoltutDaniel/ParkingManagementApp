@@ -1,32 +1,28 @@
 <div class="car-info-container">
     <div class="car-plate">
-        <h2>BH 08 JCC</h2>
+        <h2>{{car.licensePlate}}</h2>
     </div>
-    <div class="status" *ngIf="parked">
+    <div class="status" *ngIf="car.parkingStatus">
         Status: Parked <i class="fa-solid fa-circle" style="color: green; font-size: 1em;"></i>
     </div>
 
-    <div class="status" *ngIf="!parked">
+    <div class="status" *ngIf="!car.parkingStatus">
         Status: Away <i class="fa-solid fa-circle" style="color: red; font-size: 1em;"></i>
     </div>
+    <div class="car-info">
+        <div class="parking-lot">
+            Parking Lot: {{parkingLotName}}
+        </div>
 
-    <div class="time-parked" *ngIf="parked">
-        Parked for: 23 Hrs 32 Mins
-    </div>
-
-    <div class="time-parked" *ngIf="!parked">
-        Away for: 23 Hrs 32 Mins
-    </div>
-
-    <div class="parking-lot">
-        Parking Lot: Parking Name
-    </div>
-
-    <div class="subscription">
-        Subscription expiration date: 18.03.2022
+        <div class="subscription" *ngIf="noSubscription == false">
+            Subscription expiration date: {{car.subscriptionDTO.endDate}}
+        </div>
+        <div class="subscription" *ngIf="noSubscription == true">
+            No subscription found for this car.
+        </div>
     </div>
 
     <div class="brand">
-        <img class="app-logo" src="assets/images/{{brand}}.png">
+        <img class="app-logo" src="assets/images/{{car.brand}}.png">
     </div>
 </div>

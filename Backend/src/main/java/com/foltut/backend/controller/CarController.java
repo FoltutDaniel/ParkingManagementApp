@@ -1,5 +1,6 @@
 package com.foltut.backend.controller;
 
+import com.foltut.backend.dto.carDTO.CarDTO;
 import com.foltut.backend.dto.carDTO.CarRegisterDTO;
 import com.foltut.backend.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,10 @@ public class CarController {
         return carService.removeCar(licensePlate);
     }
 
+    @GetMapping("/all/{userId}")
+    public List<CarDTO> getCarsForUser(@PathVariable("userId") Long userId){
+        return carService.getAllCarsForUser(userId);
+    }
 
 
 

@@ -1,16 +1,16 @@
-<form class="container" (ngSubmit)="getData()">
+<form [formGroup]="changeEmailForm" class="container" (ngSubmit)="getData()">
     <h2 class="title">Change email</h2>
     <div class="input-container">
         <label for="old-email">Old email: </label>
-        <input type="text" name="old-email" id="old-email" class="old-email">
+        <input type="text" name="old-email" id="old-email" class="old-email" formControlName="oldEmail">
     </div>
     <div class="input-container">
         <label for="new-email">New email: </label>
-        <input type="text" name="new-email" id="new-email" class="new-email">
+        <input type="text" name="new-email" id="new-email" class="new-email" formControlName="newEmail">
     </div>
     <div class="input-container">
         <label for="password">Confirm password: </label>
-        <input type="password" name="password" id="password" class="plate">
+        <input type="password" name="password" id="password" class="plate" formControlName="password">
     </div>
     
     <button class="confirm-btn" type="submit">Confirm</button>

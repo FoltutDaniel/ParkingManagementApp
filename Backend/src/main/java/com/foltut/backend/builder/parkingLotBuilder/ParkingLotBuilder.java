@@ -16,14 +16,17 @@ public class ParkingLotBuilder {
         );
     }
     public static ParkingLotDTO generateDTOFromEntity(ParkingLot parkingLot){
-        return new ParkingLotDTO(
-                parkingLot.getId(),
-                parkingLot.getName(),
-                parkingLot.getAddress(),
-                parkingLot.getLatitude(),
-                parkingLot.getLongitude(),
-                parkingLot.getMaxCapacity(),
-                parkingLot.getCars().size()
-        );
+        if(parkingLot != null) {
+            return new ParkingLotDTO(
+                    parkingLot.getId(),
+                    parkingLot.getName(),
+                    parkingLot.getAddress(),
+                    parkingLot.getLatitude(),
+                    parkingLot.getLongitude(),
+                    parkingLot.getMaxCapacity(),
+                    parkingLot.getCars().size()
+            );
+        }
+        return null;
     }
 }

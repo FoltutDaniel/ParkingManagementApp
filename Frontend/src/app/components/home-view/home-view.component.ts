@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Car } from 'src/app/common/car';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-home-view',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeViewComponent implements OnInit {
 
-  constructor() { }
+  ownedCars: Car[] = [];
+  userId: number = Number(sessionStorage.getItem('userId'));
+  constructor(private carService: CarService) { }
 
   ngOnInit(): void {
+     this.carService.getCarsForUser(this.userId).then(
+       (res)=>{
+        this.ownedCars = res;
+        console.log(this.ownedCars);
+       },
+       (err)=>{
+         alert('Users cars could not be retrieved');
+       }
+     )
   }
 
 }

@@ -6,6 +6,9 @@
             <option *ngFor="let plate of numberPlates" value="{{plate}}">
                 {{plate}}
             </option>
+            <option disabled selected *ngIf="numberPlates.length < 1">
+                No cars without a subscription.
+            </option>
         </select>
     </div>
     <button class="confirm-btn" type="submit">Confirm</button>

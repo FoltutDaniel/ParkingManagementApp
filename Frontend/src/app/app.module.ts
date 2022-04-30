@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -33,6 +33,8 @@ import { ParkingLogsViewComponent } from './components/parking-logs-view/parking
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ChangeEmailComponent } from './components/change-email/change-email.component';
 import { ConfirmSubscriptionComponent } from './components/confirm-subscription/confirm-subscription.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { CancelSubscriptionComponent } from './components/cancel-subscription/cancel-subscription.component';
 
 const material = [
   MatSidenavModule,
@@ -58,7 +60,8 @@ const material = [
     ParkingLogsViewComponent,
     ChangePasswordComponent,
     ChangeEmailComponent,
-    ConfirmSubscriptionComponent
+    ConfirmSubscriptionComponent,
+    CancelSubscriptionComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,9 @@ const material = [
   exports: [
     material
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

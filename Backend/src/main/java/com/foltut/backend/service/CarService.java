@@ -1,5 +1,6 @@
 package com.foltut.backend.service;
 
+import com.foltut.backend.builder.carBuilder.CarBuilder;
 import com.foltut.backend.dto.carDTO.CarDTO;
 import com.foltut.backend.dto.carDTO.CarRegisterDTO;
 import com.foltut.backend.exception.ResourceNotFoundException;
@@ -56,7 +57,11 @@ public class CarService {
             if(!user.isPresent()){
                 throw new ResourceNotFoundException("User", "User id", userId);
             }else{
-                return null;
+                return user.get()
+                        .getCars()
+                        .stream()
+                        .map(CarBuilder::generateDTOFromEntity)
+                        .collect(Collectors.toList());
             }
     }
 
@@ -69,6 +74,7 @@ public class CarService {
             return user.get()
                     .getCars()
                     .stream()
+                    .filter(car -> car.getSubscription() == null)
                     .map(Car::getLicensePlate)
                     .collect(Collectors.toList());
         }

@@ -5,16 +5,19 @@
                 Parking subscription
             </h2>
             <p class="subscription-period">
-                Subscription period: 3 months
+                Subscription period: {{subscriptionPeriod}} months
             </p>
             <div class="start-date">
-                <label class="start-date-label" for="dateofbirth">Start date:</label>
-                <input class="start-date-picker" type="date" name="dateofbirth" id="dateofbirth">
+                <label class="start-date-label" for="start-date">Start date:</label>
+                <input class="start-date-picker" type="date" name="start-date" id="start-date" [value]="startDate | date:'yyyy-MM-dd'">
             </div>
             <label for="car">Select car for subscription: </label>
             <select name="car" id="car" class="car-plate-dropdown">
-                <option *ngFor="let plate of carPlates" value="{{plate}}">
+                <option *ngFor="let plate of numberPlates" value="{{plate}}">
                     {{plate}}
+                </option>
+                <option disabled selected *ngIf="numberPlates.length < 1">
+                    No cars without a subscription.
                 </option>
             </select>
         </div>
@@ -23,9 +26,9 @@
 </div>
 <div class="confirm-container">
     <p class="price">
-        Price: 100 lei
+        Price: {{subscriptionPrice}} lei
     </p>
-    <button class="confirm-subscription-btn">
+    <button class="confirm-subscription-btn" (click)="purchaseSubscription()">
         Confirm
     </button>
 </div>

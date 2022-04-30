@@ -18,19 +18,17 @@ public class CarDTO {
 
     private ParkingLotDTO parkingLotDTO;
 
-    private UserDTO userDTO;
 
     public CarDTO() {
     }
 
-    public CarDTO(Long id, String licensePlate, String brand, Boolean parkingStatus, SubscriptionDTO subscriptionDTO, ParkingLotDTO parkingLotDTO, UserDTO userDTO) {
+    public CarDTO(Long id, String licensePlate, String brand, Boolean parkingStatus, SubscriptionDTO subscriptionDTO, ParkingLotDTO parkingLotDTO) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.brand = brand;
         this.parkingStatus = parkingStatus;
         this.subscriptionDTO = subscriptionDTO;
         this.parkingLotDTO = parkingLotDTO;
-        this.userDTO = userDTO;
     }
 
 
@@ -81,13 +79,5 @@ public class CarDTO {
 
     public void setParkingLotDTO(ParkingLotDTO parkingLotDTO) {
         this.parkingLotDTO = parkingLotDTO;
-    }
-
-    public UserDTO getUserDTO() {
-        return userDTO;
-    }
-
-    public void setUserDTO(UserDTO userDTO) {
-        this.userDTO = userDTO;
     }
 }

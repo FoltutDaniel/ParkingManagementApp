@@ -21,10 +21,10 @@ public class Car {
     private String brand;
 
     @OneToOne
-    @JoinColumn(name = "subscription_id", referencedColumnName = "id")
+    @JoinColumn(name = "subscription_id", referencedColumnName = "id", nullable = true)
     private Subscription subscription;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "parking_lot_id")
     private ParkingLot parkingLot;
 

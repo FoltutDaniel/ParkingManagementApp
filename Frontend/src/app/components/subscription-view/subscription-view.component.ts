@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subscription-view',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscriptionViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  selectSubscription(subscriptionType: number){
+    sessionStorage.setItem('subscriptionType', subscriptionType + '');
+    this.router.navigateByUrl('/confirm-subscription');
   }
 
 }

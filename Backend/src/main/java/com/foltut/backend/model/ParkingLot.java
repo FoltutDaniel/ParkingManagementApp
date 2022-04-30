@@ -1,6 +1,7 @@
 package com.foltut.backend.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class ParkingLot {
     @Column(name = "max_capacity")
     private Integer maxCapacity;
 
-    @OneToMany(mappedBy = "parkingLot")
+    @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.PERSIST)
     private List<Car> cars;
 
     public ParkingLot() {
@@ -96,5 +97,19 @@ public class ParkingLot {
 
     public void setMaxCapacity(Integer maxCapacity) {
         this.maxCapacity = maxCapacity;
+    }
+
+    public void addCar(Car car){
+        if(cars == null){
+            cars = new ArrayList<>();
+        }else{
+            cars.add(car);
+            car.setParkingLot(this);
+        }
+    }
+
+    public void removeCar(Car car){
+        cars.remove(car);
+        car.setParkingLot(null);
     }
 }

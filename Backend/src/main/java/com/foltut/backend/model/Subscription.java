@@ -12,9 +12,6 @@ public class Subscription {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
-
     @Column(name = "price")
     private Double price;
 
@@ -34,20 +31,21 @@ public class Subscription {
     public Subscription() {
     }
 
+    public Subscription(Long id, Double price, LocalDate startDate, LocalDate endDate, Car car, User subscriptionUser) {
+        this.id = id;
+        this.price = price;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.car = car;
+        this.subscriptionUser = subscriptionUser;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Double getPrice() {
@@ -72,5 +70,21 @@ public class Subscription {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public User getSubscriptionUser() {
+        return subscriptionUser;
+    }
+
+    public void setSubscriptionUser(User subscriptionUser) {
+        this.subscriptionUser = subscriptionUser;
     }
 }

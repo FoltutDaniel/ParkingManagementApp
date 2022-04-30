@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Car } from '../common/car';
 import { CarRegister } from '../common/car-register';
 
 @Injectable({
@@ -20,6 +21,10 @@ export class CarService {
 
   getLicensePlates(userId: number): Promise<string[]>{
     return this.http.get<string[]>(this.baseUrl + "/getPlates/" + userId).toPromise();
+  }
+
+  getCarsForUser(userId: number): Promise<Car[]>{
+    return this.http.get<Car[]>(this.baseUrl+"/all/" + userId).toPromise();
   }
   
 }

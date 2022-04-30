@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Car } from 'src/app/common/car';
 
 @Component({
   selector: 'app-car',
@@ -7,11 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarComponent implements OnInit {
 
+  @Input()
+  car!: Car;
+
+  noSubscription: boolean = false;;
+
+  parkingLotName: string = 'Away';
+
   constructor() { }
-  parked: Boolean = false;
-  brand: String = "bmw";
 
   ngOnInit(): void {
+    if(this.car.parkingLotDTO != null){
+      this.parkingLotName = this.car.parkingLotDTO.name;
+    }
+
+    if(this.car.subscriptionDTO == null){
+      this.noSubscription = true;
+    }
   }
 
 }

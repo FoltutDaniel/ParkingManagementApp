@@ -12,12 +12,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SideMenuComponent implements OnInit{
 
-  username: string = 'John Doe';
+  username: string = 'Annonymous User';
   toggled: boolean = false;
   constructor(private auth: AuthService) {}
 
   ngOnInit(){
-
+    this.username = sessionStorage.getItem('username')!;
   }
 
   toggleSideNav(){

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddCarComponent } from './components/add-car/add-car.component';
+import { CancelSubscriptionComponent } from './components/cancel-subscription/cancel-subscription.component';
 import { ChangeEmailComponent } from './components/change-email/change-email.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ConfirmSubscriptionComponent } from './components/confirm-subscription/confirm-subscription.component';
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'remove-car', component: RemoveCarComponent, canActivate: [AuthGuard]},
   { path: 'change-email', component: ChangeEmailComponent, canActivate: [AuthGuard]},
   { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
-  { path: 'confirm-subscription', component: ConfirmSubscriptionComponent, canActivate: [AuthGuard]}
+  { path: 'confirm-subscription', component: ConfirmSubscriptionComponent, canActivate: [AuthGuard]},
+  { path: 'cancel-subscription', component: CancelSubscriptionComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
