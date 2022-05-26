@@ -89,7 +89,7 @@ public class UserController {
 
 
     @GetMapping("/getUsername")
-    public String getUser(){
+    public User getUser(){
         return userService.getUsernameFromSecurityContext();
     }
 }

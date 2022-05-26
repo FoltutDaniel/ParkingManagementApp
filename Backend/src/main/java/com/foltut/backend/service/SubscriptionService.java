@@ -20,26 +20,26 @@ public class SubscriptionService {
     private SubscriptionRepository subscriptionRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private HistoryService historyService;
+
     public Long purchaseSubscription(SubscriptionPurchaseDTO subscriptionPurchaseDTO){
         Optional<Car> selectedCar = carRepository.findByLicensePlate(subscriptionPurchaseDTO.getLicensePlate());
-        Optional<User> currentUser = userRepository.findById(subscriptionPurchaseDTO.getUserId());
+        User currentUser = userService.getUsernameFromSecurityContext();
 
         if(!selectedCar.isPresent()){
             throw new ResourceNotFoundException("Car", "Car license plate", subscriptionPurchaseDTO.getLicensePlate());
-        }
-        if(!currentUser.isPresent()){
-            throw new ResourceNotFoundException("User", "User id", subscriptionPurchaseDTO.getUserId());
         }
 
         Subscription newSubscription = new Subscription();
         newSubscription.setCar(selectedCar.get());
         selectedCar.get().setSubscription(newSubscription);
-        newSubscription.setSubscriptionUser(currentUser.get());
+        newSubscription.setSubscriptionUser(currentUser);
         newSubscription.setStartDate(subscriptionPurchaseDTO.getStartDate());
 
         switch (subscriptionPurchaseDTO.getSubscriptionType()){

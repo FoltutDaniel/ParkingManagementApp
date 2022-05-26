@@ -46,43 +46,43 @@ public class UserService {
     }
 
     public Boolean changeEmail(ChangeEmailRequestDTO changeEmailRequestDTO){
-        Optional<User> currentUser = userRepository.findByUsername(this.getUsernameFromSecurityContext());
+        User currentUser = this.getUsernameFromSecurityContext();
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         this.getUsernameFromSecurityContext(),
                         changeEmailRequestDTO.getPassword()
                 )
         );
-        if(!currentUser.get().getEmail().equals(changeEmailRequestDTO.getOldEmail())){
+        if(!currentUser.getEmail().equals(changeEmailRequestDTO.getOldEmail())){
             return false;
         }
-        currentUser.get().setEmail(changeEmailRequestDTO.getNewEmail());
-        userRepository.save(currentUser.get());
+        currentUser.setEmail(changeEmailRequestDTO.getNewEmail());
+        userRepository.save(currentUser);
         return true;
     }
 
     public Boolean changePassword(ChangePasswordRequestDTO changePasswordRequestDTO){
-        Optional<User> currentUser = userRepository.findByUsername(this.getUsernameFromSecurityContext());
+        User currentUser = this.getUsernameFromSecurityContext();
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         this.getUsernameFromSecurityContext(),
                         changePasswordRequestDTO.getOldPassword()
                 )
         );
-        currentUser.get().setPassword(bCryptPasswordEncoder.encode(changePasswordRequestDTO.getNewPassword()));
-        userRepository.save(currentUser.get());
+        currentUser.setPassword(bCryptPasswordEncoder.encode(changePasswordRequestDTO.getNewPassword()));
+        userRepository.save(currentUser);
         return true;
     }
 
-    public String getUsernameFromSecurityContext(){
+    public User getUsernameFromSecurityContext(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof UserDetails) {
             String username = ((UserDetails)principal).getUsername();
-            return username;
+            return userRepository.findByUsername(username).get();
         } else {
             String username = principal.toString();
-            return username;
+            return userRepository.findByUsername(username).get();
         }
 
     }

@@ -1,6 +1,7 @@
 package com.foltut.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.foltut.backend.enums.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -32,11 +33,18 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Enumerated(EnumType.ORDINAL)
+    private UserRole userRole;
+
     @OneToMany(mappedBy = "owner")
     private List<Car> cars;
 
     @OneToMany(mappedBy = "subscriptionUser")
     private List<Subscription> subscriptions;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "performer")
+    private List<History> histories;
 
     public User() {
     }
@@ -47,6 +55,31 @@ public class User implements UserDetails {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String username, String firstName, String lastName, String email, String password, UserRole userRole) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userRole = userRole;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    public List<History> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(List<History> histories) {
+        this.histories = histories;
     }
 
     public List<Car> getCars() {

@@ -3,10 +3,13 @@ package com.foltut.backend.service;
 import com.foltut.backend.builder.parkingLotBuilder.ParkingLotBuilder;
 import com.foltut.backend.dto.ParkingLotDTO.ParkingLotDTO;
 import com.foltut.backend.dto.requestDTO.ParkingRequestDTO;
+import com.foltut.backend.enums.Opperation;
 import com.foltut.backend.exception.ResourceNotFoundException;
 import com.foltut.backend.exception.SubscriptionExpiredException;
 import com.foltut.backend.model.Car;
+import com.foltut.backend.model.History;
 import com.foltut.backend.model.ParkingLot;
+import com.foltut.backend.model.User;
 import com.foltut.backend.repository.CarRepository;
 import com.foltut.backend.repository.ParkingLotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,12 @@ public class ParkingLotService {
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private HistoryService historyService;
+
     public Long saveParkingLot(ParkingLotDTO parkingLotDTO){
 
         ParkingLot newParkingLot = ParkingLotBuilder.generateEntityFromDTO(parkingLotDTO);
@@ -43,6 +52,7 @@ public class ParkingLotService {
     }
 
     public Boolean parkCar(ParkingRequestDTO parkingRequestDTO){
+//        User performer = userService.getUsernameFromSecurityContext();
         Optional<Car> car = carRepository.findByLicensePlate(parkingRequestDTO.getLicensePlate());
         if(!car.isPresent()){
             throw new ResourceNotFoundException("Car", "Car license plate", parkingRequestDTO.getLicensePlate());
@@ -64,12 +74,29 @@ public class ParkingLotService {
             car.get().setParkingStatus(true);
             carRepository.save(car.get());
             parkingLotRepository.save(parkingLot.get());
+
+            String information = String.format("User %s parked at %s the car with license plate: %s",
+                    car.get().getOwner().getUsername(),
+                    parkingLot.get().getName(),
+                    car.get().getLicensePlate());
+
+            History newHistory = new History(car.get().getOwner(), information, Opperation.PARK_CAR);
+            historyService.createHistory(newHistory);
+
             return true;
         }else if(car.get().getParkingStatus() == true){
             parkingLot.get().removeCar(car.get());
             car.get().setParkingStatus(false);
             carRepository.save(car.get());
             parkingLotRepository.save(parkingLot.get());
+
+            String information = String.format("User %s exited parking %s the car with license plate: %s",
+                    car.get().getOwner().getUsername(),
+                    parkingLot.get().getName(),
+                    car.get().getLicensePlate());
+
+            History newHistory = new History(car.get().getOwner(), information, Opperation.EXIT_PARK);
+            historyService.createHistory(newHistory);
             return true;
         }
 

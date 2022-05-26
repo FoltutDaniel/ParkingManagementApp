@@ -17,8 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.foltut.backend.security.SecurityConstants.H2_URL;
-import static com.foltut.backend.security.SecurityConstants.SIGN_UP_URLS;
+import static com.foltut.backend.security.SecurityConstants.*;
 
 
 @Configuration
@@ -74,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js"
                 ).permitAll()
+                .antMatchers(PARK_URL).permitAll()
                 .antMatchers(SIGN_UP_URLS).permitAll()
                 .antMatchers(H2_URL).permitAll()
                 .anyRequest().authenticated();
