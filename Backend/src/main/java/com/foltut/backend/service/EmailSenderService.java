@@ -37,7 +37,7 @@ public class EmailSenderService {
     public void execute(){
         List<Subscription> subscriptionsToExpire = StreamSupport
                 .stream(subscriptionRepository.findAll().spliterator(),false)
-                .filter(subscription -> subscription.getEndDate().isEqual(LocalDate.now().minusDays(1)))
+                .filter(subscription -> subscription.getEndDate().isEqual(LocalDate.now().plusDays(1)))
                 .collect(Collectors.toList());
 
         subscriptionsToExpire
