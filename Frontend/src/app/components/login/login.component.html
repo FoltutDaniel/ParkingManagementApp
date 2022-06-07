@@ -1,13 +1,28 @@
+<div class="error-banner" [hidden]="bannerDisabled">
+  Username or password is wrong.
+</div>
 <form class="form-container" [formGroup]="loginForm" (ngSubmit)="login()">
         <img class="app-logo" src="assets/images/logo.png">
         <div class="login-input-container">
             <label class="login-label" for="username">Username</label>
-            <input class="login-input" name="username" type="text" formControlName="username"  placeholder="Enter username">
+          <ng-container *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)" >
+            <small *ngIf="loginForm.controls['username'].errors.required" class="alert-danger" style="margin-left: 10px">
+              Username is required.
+            </small>
+          </ng-container>
+            <input class="login-input" name="username" id="username" type="text" formControlName="username"  placeholder="Enter username">
         </div>
         <div class="login-input-container">
-            <label class="login-label" for="username">Password</label>
-            <input class="login-input" name="password" type="password" formControlName="password" placeholder="Enter password">
+            <label class="login-label" for="password">Password</label>
+          <ng-container *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" >
+            <small *ngIf="loginForm.controls['password'].errors.required" class="alert-danger" style="margin-left: 10px">
+              Password is required.
+            </small>
+          </ng-container>
+            <input class="login-input" name="password" id="password" type="password" formControlName="password" placeholder="Enter password">
         </div>
-        <button class="login-button">Login</button>
-        <button routerLink="/register" class="login-button">Sign up</button>
+        <div class="button-container">
+          <button class="login-button" [disabled]="loginForm.invalid">Login</button>
+          <button routerLink="/register" class="login-button">Sign up</button>
+        </div>
     </form>

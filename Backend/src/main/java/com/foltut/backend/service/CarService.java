@@ -13,12 +13,14 @@ import com.foltut.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class CarService {
 
     @Autowired
@@ -34,17 +36,17 @@ public class CarService {
 
         public Long registerCar(CarRegisterDTO carRegisterDTO){
 
-        User carOwner = userService.getUsernameFromSecurityContext();
+        Optional<User> carOwner = userRepository.findById(carRegisterDTO.getOwnerId());
 
             Car newCar = new Car(carRegisterDTO.getLicensePlate(),
                     carRegisterDTO.getBrand().toLowerCase(Locale.ROOT),
-                    carOwner);
+                    carOwner.get());
 
             newCar.setParkingStatus(false);
             carRepository.save(newCar);
 
-            String information = String.format("User %s registered a new car with license plate: %s", carOwner.getUsername(), newCar.getLicensePlate());
-            History newHistory = new History(carOwner, information, Opperation.REGISTER_CAR);
+            String information = String.format("User %s registered a new car with license plate: %s", carOwner.get().getUsername(), newCar.getLicensePlate());
+            History newHistory = new History(carOwner.get(), information, Opperation.REGISTER_CAR);
             historyService.createHistory(newHistory);
 
             return  newCar.getId();
@@ -53,15 +55,14 @@ public class CarService {
 
     public Long removeCar(String licensePlate){
 
-            User carOwner = userService.getUsernameFromSecurityContext();
             Optional<Car> carToRemove = carRepository.findByLicensePlate(licensePlate);
             if(!carToRemove.isPresent()){
                 throw new ResourceNotFoundException("Car", "Car license plate", licensePlate);
             }else{
                 carRepository.delete(carToRemove.get());
 
-                String information = String.format("User %s removed car with license plate: %s", carOwner.getUsername(), licensePlate);
-                History newHistory = new History(carOwner, information, Opperation.REMOVE_CAR);
+                String information = String.format("User %s removed car with license plate: %s", carToRemove.get().getOwner().getUsername(), licensePlate);
+                History newHistory = new History(carToRemove.get().getOwner(), information, Opperation.REMOVE_CAR);
                 historyService.createHistory(newHistory);
 
                 return carToRemove.get().getId();

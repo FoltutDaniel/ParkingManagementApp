@@ -2,15 +2,18 @@ package com.foltut.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.foltut.backend.enums.UserRole;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_table")
 public class User implements UserDetails {
 
     @Id
@@ -36,14 +39,17 @@ public class User implements UserDetails {
     @Enumerated(EnumType.ORDINAL)
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Car> cars;
 
-    @OneToMany(mappedBy = "subscriptionUser")
+    @OneToMany(mappedBy = "subscriptionUser", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Subscription> subscriptions;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "performer")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.REMOVE)
     private List<History> histories;
 
     public User() {
@@ -174,5 +180,18 @@ public class User implements UserDetails {
     @JsonIgnore
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }

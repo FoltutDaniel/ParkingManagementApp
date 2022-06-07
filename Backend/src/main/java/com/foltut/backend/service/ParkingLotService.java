@@ -15,6 +15,7 @@ import com.foltut.backend.repository.ParkingLotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
+@Transactional
 public class ParkingLotService {
 
     @Autowired
@@ -63,10 +65,10 @@ public class ParkingLotService {
         }
 
         if(car.get().getSubscription() == null){
-            throw new ResourceNotFoundException("Subscription", "Subscription for car with license plate", parkingRequestDTO.getLicensePlate());
+            return false;
         }
         if(car.get().getSubscription().getEndDate().isBefore(LocalDate.now())){
-            throw new SubscriptionExpiredException(car.get().getLicensePlate());
+            return false;
         }
 
         if(car.get().getParkingStatus() == false && (parkingLot.get().getMaxCapacity() - parkingLot.get().getCars().size())>0){

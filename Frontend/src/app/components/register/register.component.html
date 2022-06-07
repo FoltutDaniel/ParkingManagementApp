@@ -1,24 +1,55 @@
 <form class="form-container" [formGroup]="registerForm" (ngSubmit)="register()">
     <img class="app-logo" src="assets/images/logo.png">
     <div class="login-input-container">
-        <label class="login-label" for="username">Username</label>
+        <label class="login-label" for="username">Username  </label>
+        <ng-container *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)" >
+          <small *ngIf="registerForm.controls['username'].errors.required" class="alert-danger" style="margin-left: 10px">
+            Username is required.
+          </small>
+        </ng-container>
         <input class="login-input" name="username" type="text" formControlName="username"  placeholder="Enter username">
     </div>
     <div class="login-input-container">
         <label class="login-label" for="firstName">First Name</label>
+        <ng-container *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].dirty || registerForm.controls['firstName'].touched)" >
+          <small *ngIf="registerForm.controls['firstName'].errors.required" class="alert-danger" style="margin-left: 10px">
+            First name is required.
+          </small>
+        </ng-container>
         <input class="login-input" name="firstName" type="text" formControlName="firstName"  placeholder="Enter first name">
     </div>
     <div class="login-input-container">
         <label class="login-label" for="lastName">Last Name</label>
+        <ng-container *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)" >
+          <small *ngIf="registerForm.controls['lastName'].errors.required" class="alert-danger" style="margin-left: 10px">
+            Last name is required.
+          </small>
+        </ng-container>
         <input class="login-input" name="lastName" type="text" formControlName="lastName"  placeholder="Enter last name">
     </div>
     <div class="login-input-container">
         <label class="login-label" for="email">Email</label>
+        <ng-container *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)" >
+          <small *ngIf="registerForm.controls['email'].errors.required" class="alert-danger" style="margin-left: 10px">
+            Email is required.
+          </small>
+          <small *ngIf="registerForm.controls['email'].errors.email" class="alert-danger" style="margin-left: 10px">
+            Invalid email.
+          </small>
+        </ng-container>
         <input class="login-input" name="email" type="text" formControlName="email"  placeholder="Enter email">
     </div>
     <div class="login-input-container">
         <label class="login-label" for="password">Password</label>
+        <ng-container *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)" >
+          <small *ngIf="registerForm.controls['password'].errors.required" class="alert-danger" style="margin-left: 10px">
+            Password is required.
+          </small>
+          <small *ngIf="registerForm.controls['password'].errors.minLength(6)" class="alert-danger" style="margin-left: 10px">
+            Password length should be > 6 characters.
+          </small>
+        </ng-container>
         <input class="login-input" name="password" type="password" formControlName="password" placeholder="Enter password">
     </div>
-    <button  class="login-button" type="submit">Sign up</button>
+    <button  class="login-button" type="submit" [disabled]="registerForm.invalid">Sign up</button>
 </form>

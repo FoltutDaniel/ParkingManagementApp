@@ -16,9 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -33,26 +35,20 @@ public class UserService {
 
     public User registerUser (UserRegisterDTO userRegisterDTO){
         User newUser = UserRegisterBuilder.generateEntityFromDto(userRegisterDTO);
-        try{
+//        try{
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
             //Username has to be unique (exception)
             newUser.setUsername(newUser.getUsername());
             return userRepository.save(newUser);
 
-        }catch (Exception e){
-            throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
-        }
+//        }catch (Exception e){
+//            throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
+//        }
 
     }
 
     public Boolean changeEmail(ChangeEmailRequestDTO changeEmailRequestDTO){
-        User currentUser = this.getUsernameFromSecurityContext();
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        this.getUsernameFromSecurityContext(),
-                        changeEmailRequestDTO.getPassword()
-                )
-        );
+        User currentUser = userRepository.findByEmail(changeEmailRequestDTO.getOldEmail());
         if(!currentUser.getEmail().equals(changeEmailRequestDTO.getOldEmail())){
             return false;
         }
@@ -62,15 +58,9 @@ public class UserService {
     }
 
     public Boolean changePassword(ChangePasswordRequestDTO changePasswordRequestDTO){
-        User currentUser = this.getUsernameFromSecurityContext();
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        this.getUsernameFromSecurityContext(),
-                        changePasswordRequestDTO.getOldPassword()
-                )
-        );
-        currentUser.setPassword(bCryptPasswordEncoder.encode(changePasswordRequestDTO.getNewPassword()));
-        userRepository.save(currentUser);
+        Optional<User> currentUser = userRepository.findByUsername(changePasswordRequestDTO.getUsername());
+        currentUser.get().setPassword(bCryptPasswordEncoder.encode(changePasswordRequestDTO.getNewPassword()));
+        userRepository.save(currentUser.get());
         return true;
     }
 

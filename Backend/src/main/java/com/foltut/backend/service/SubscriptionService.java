@@ -11,9 +11,12 @@ import com.foltut.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class SubscriptionService {
 
     @Autowired
@@ -28,9 +31,12 @@ public class SubscriptionService {
     @Autowired
     private HistoryService historyService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public Long purchaseSubscription(SubscriptionPurchaseDTO subscriptionPurchaseDTO){
         Optional<Car> selectedCar = carRepository.findByLicensePlate(subscriptionPurchaseDTO.getLicensePlate());
-        User currentUser = userService.getUsernameFromSecurityContext();
+        Optional<User> currentUser = userRepository.findById(subscriptionPurchaseDTO.getUserId());
 
         if(!selectedCar.isPresent()){
             throw new ResourceNotFoundException("Car", "Car license plate", subscriptionPurchaseDTO.getLicensePlate());
@@ -39,7 +45,7 @@ public class SubscriptionService {
         Subscription newSubscription = new Subscription();
         newSubscription.setCar(selectedCar.get());
         selectedCar.get().setSubscription(newSubscription);
-        newSubscription.setSubscriptionUser(currentUser);
+        newSubscription.setSubscriptionUser(currentUser.get());
         newSubscription.setStartDate(subscriptionPurchaseDTO.getStartDate());
 
         switch (subscriptionPurchaseDTO.getSubscriptionType()){
