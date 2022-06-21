@@ -57,13 +57,12 @@ void loop() {
           delay(15);
        }
   
-       delay(50000);
+       delay(5000);
   
       for(angle = 90; angle >=1; angle = angle-5){
         servo_test.write(angle);
         delay(15);
       }
-      delay(10000);
     }
   }
   delay(1000);
