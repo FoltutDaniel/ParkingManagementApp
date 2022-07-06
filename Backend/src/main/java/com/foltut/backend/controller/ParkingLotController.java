@@ -2,6 +2,7 @@ package com.foltut.backend.controller;
 
 import com.foltut.backend.dto.ParkingLotDTO.ParkingLotDTO;
 import com.foltut.backend.dto.requestDTO.ParkingRequestDTO;
+import com.foltut.backend.model.ParkingLot;
 import com.foltut.backend.service.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,11 @@ public class ParkingLotController {
     @PutMapping("/park")
     public Boolean parkCar(@RequestBody() ParkingRequestDTO parkingRequestDTO){
         return parkingLotService.parkCar(parkingRequestDTO);
+    }
+
+    @PostMapping("/add-park")
+    public ParkingLot addPark(@RequestBody() ParkingLot parkingLot){
+        return parkingLotService.addPark(parkingLot);
     }
 
 }

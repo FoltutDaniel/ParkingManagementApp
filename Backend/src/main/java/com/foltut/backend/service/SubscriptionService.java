@@ -70,4 +70,13 @@ public class SubscriptionService {
         subscriptionRepository.save(newSubscription);
         return newSubscription.getId();
     }
+
+    public Boolean cancelSubscription(String licensePlate){
+        Optional<Car> car = carRepository.findByLicensePlate(licensePlate);
+        Subscription subscription = car.get().getSubscription();
+        car.get().setSubscription(null);
+        subscriptionRepository.delete(subscription);
+
+        return true;
+    }
 }

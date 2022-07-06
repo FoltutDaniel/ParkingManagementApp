@@ -98,4 +98,20 @@ public class CarService {
         }
 
     }
+
+    public List<String> getCarsWithSubscription(Long userId){
+
+        Optional<User> user = userRepository.findById(userId);
+        if(!user.isPresent()){
+            throw new ResourceNotFoundException("User", "User id", userId);
+        }else{
+            return user.get()
+                    .getCars()
+                    .stream()
+                    .filter(car -> car.getSubscription() != null)
+                    .map(Car::getLicensePlate)
+                    .collect(Collectors.toList());
+        }
+
+    }
 }

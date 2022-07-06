@@ -17,4 +17,9 @@ public class SubscriptionController {
     public Long purchaseSubscription(@RequestBody()SubscriptionPurchaseDTO subscriptionPurchaseDTO){
         return subscriptionService.purchaseSubscription(subscriptionPurchaseDTO);
     }
+
+    @PostMapping("/cancel")
+    public Boolean cancelSubscription(@RequestBody()String licensePlate){
+        return subscriptionService.cancelSubscription(licensePlate);
+    }
 }

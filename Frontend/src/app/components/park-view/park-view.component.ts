@@ -10,6 +10,7 @@ import { ParkingLotService } from 'src/app/services/parking-lot.service';
 export class ParkViewComponent implements OnInit {
 
   parkingLots: ParkingLot[] = [];
+  admin: boolean = false;
   constructor(private parkingService: ParkingLotService) { }
 
   ngOnInit(): void {

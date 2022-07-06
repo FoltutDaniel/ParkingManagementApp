@@ -53,6 +53,10 @@ public class ParkingLotService {
                 .collect(Collectors.toList());
     }
 
+    public ParkingLot addPark(ParkingLot parkingLot){
+        return parkingLotRepository.save(parkingLot);
+    }
+
     public Boolean parkCar(ParkingRequestDTO parkingRequestDTO){
 //        User performer = userService.getUsernameFromSecurityContext();
         Optional<Car> car = carRepository.findByLicensePlate(parkingRequestDTO.getLicensePlate());

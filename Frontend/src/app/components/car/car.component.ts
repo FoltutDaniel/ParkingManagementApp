@@ -11,7 +11,7 @@ export class CarComponent implements OnInit {
   @Input()
   car!: Car;
 
-  noSubscription: boolean = false;;
+  noSubscription: boolean = false;
 
   parkingLotName: string = 'Away';
 

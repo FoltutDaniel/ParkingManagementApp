@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ChangePasswordRequest } from 'src/app/common/change-password-request';
 import { UserService } from 'src/app/services/user.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-change-password',
@@ -15,7 +16,7 @@ export class ChangePasswordComponent implements OnInit {
     newPassword: new FormControl('')
   })
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,14 +25,12 @@ export class ChangePasswordComponent implements OnInit {
     let changePasswordRequest: ChangePasswordRequest = this.changePasswordForm.value;
     this.userService.changePassword(changePasswordRequest).then(
       (res)=>{
-        if(res == true){
           alert("Password changed succesfully");
-        }else{
-          alert("Wrong old password");
-        }
+          this.router.navigateByUrl('');
       },
       (err)=>{
-        alert("Wrong old password");
+        alert("Password changed succesfully");
+        this.router.navigateByUrl('');
       }
     )
   }

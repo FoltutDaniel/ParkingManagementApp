@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SubscriptionPurchase } from 'src/app/common/subscription-purchase';
 import { CarService } from 'src/app/services/car.service';
 import { SubscriptionService } from 'src/app/services/subscription.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-confirm-subscription',
@@ -17,7 +18,7 @@ export class ConfirmSubscriptionComponent implements OnInit {
   subscriptionPrice!: number;
   subscriptionPeriod!: number;
 
-  constructor(private carService: CarService, private subscriptionService: SubscriptionService) { }
+  constructor(private carService: CarService, private subscriptionService: SubscriptionService, private router: Router) { }
 
   ngOnInit(): void {
     this.subscriptionType = Number(sessionStorage.getItem('subscriptionType'));
@@ -50,7 +51,7 @@ export class ConfirmSubscriptionComponent implements OnInit {
         this.subscriptionPrice = 70;
         this.subscriptionPeriod = 12;
         break;
-    
+
       default:
         break;
     }
@@ -62,10 +63,11 @@ export class ConfirmSubscriptionComponent implements OnInit {
     let userId = Number(sessionStorage.getItem('userId'));
 
     let subscriptionPurchase = new SubscriptionPurchase(this.subscriptionType, startDate, selectedCarPlate, userId)
-    
+
     this.subscriptionService.purchaseSubscription(subscriptionPurchase).then(
       (res)=>{
         alert('Subscription purchased succesfully!');
+        this.router.navigateByUrl('');
       },
       (err)=>{
         alert("Subscription purchase error!")

@@ -14,4 +14,8 @@ export class SubscriptionService {
   purchaseSubscription(subscriptionPurchase: SubscriptionPurchase): Promise<number>{
     return this.http.post<number>(this.baseUrl + '/purchase', subscriptionPurchase).toPromise();
   }
+
+  cancelSubscription(licensePlate: string): Promise<Boolean>{
+    return this.http.post<boolean>(this.baseUrl + '/cancel', licensePlate).toPromise();
+  }
 }

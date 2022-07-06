@@ -1,0 +1,26 @@
+<form class="container" (ngSubmit)="getData()">
+  <h1 class="title">Add park</h1>
+  <div class="input-container">
+    <label for="name">Name: </label>
+    <input type="text" name="name" id="name">
+  </div>
+  <div class="input-container">
+    <label for="address">Address: </label>
+    <input type="text" name="address" id="address">
+  </div>
+  <div class="input-container">
+    <label for="latitude">Latitude: </label>
+    <input type="text" name="latitude" id="latitude">
+  </div>
+  <div class="input-container">
+    <label for="longitude">Longitude: </label>
+    <input type="text" name="longitude" id="longitude">
+  </div>
+
+  <div class="input-container">
+    <label for="max_capacity">Max capacity: </label>
+    <input type="text" name="max_capacity" id="max_capacity">
+  </div>
+
+  <button class="confirm-btn" type="submit">Confirm</button>
+</form>

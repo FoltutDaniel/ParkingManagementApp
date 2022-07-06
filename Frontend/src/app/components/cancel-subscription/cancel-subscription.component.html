@@ -2,7 +2,7 @@
     <h2 class="title">Cancel subscription</h2>
     <div class="input-container">
         <label for="plate">License plate: </label>
-        <select name="plate" id="plate">
+        <select name="plate" id="plate" formControlName="licensePlate">
             <option *ngFor="let plate of numberPlates" value="{{plate}}">
                 {{plate}}
             </option>
@@ -15,6 +15,6 @@
         <label for="password">Confirm password: </label>
         <input type="password" name="password" id="password" formControlName="password">
     </div>
-    
+
     <button class="confirm-btn" type="submit">Confirm</button>
 </form>

@@ -36,6 +36,11 @@ public class CarController {
         return carService.getAllCarsForUser(userId);
     }
 
+    @GetMapping("/all-nosub/{userId}")
+    public List<String> getCarsWithoutSubForUser(@PathVariable("userId") Long userId){
+        return carService.getCarsWithSubscription(userId);
+    }
+
 
 
 }
