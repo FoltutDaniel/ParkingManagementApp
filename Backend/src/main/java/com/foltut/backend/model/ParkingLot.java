@@ -1,12 +1,13 @@
 package com.foltut.backend.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "parking_lot")
-public class ParkingLot {
+public class ParkingLot implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

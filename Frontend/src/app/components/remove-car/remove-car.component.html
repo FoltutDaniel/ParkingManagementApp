@@ -1,8 +1,8 @@
 <form class="container" (ngSubmit)="getData()">
     <h2 class="title">Remove car</h2>
-    <div class="input-container"> 
+    <div class="input-container">
     <label for="plate">Number plate: </label>
-        <select name="plate" id="plate">
+        <select name="plate" id="plate" [attr.data-cy]="'REMOVE-CAR-SL'">
             <option *ngFor="let plate of numberPlates" value="{{plate}}">
                 {{plate}}
             </option>
@@ -11,5 +11,5 @@
             </option>
         </select>
     </div>
-    <button class="confirm-btn" type="submit">Confirm</button>
+    <button class="confirm-btn" type="submit" [attr.data-cy]="'CONFIRM-BTN'">Confirm</button>
 </form>

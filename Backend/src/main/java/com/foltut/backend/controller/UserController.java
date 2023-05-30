@@ -92,4 +92,10 @@ public class UserController {
     public User getUser(){
         return userService.getUsernameFromSecurityContext();
     }
+
+    @DeleteMapping("")
+    public ResponseEntity<?> deleteUser(){
+        this.userService.deleteUserByUsername();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

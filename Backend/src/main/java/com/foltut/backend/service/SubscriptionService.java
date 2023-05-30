@@ -65,6 +65,10 @@ public class SubscriptionService {
                 newSubscription.setEndDate(subscriptionPurchaseDTO.getStartDate().plusMonths(12));
                 newSubscription.setPrice(70d);
                 break;
+            case 5:
+                newSubscription.setEndDate(subscriptionPurchaseDTO.getStartDate().plusDays(1));
+                newSubscription.setPrice(10d);
+                break;
         }
 
         subscriptionRepository.save(newSubscription);

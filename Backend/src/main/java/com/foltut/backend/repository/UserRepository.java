@@ -15,4 +15,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     Optional<User> getById(Long id);
 
     User findByEmail(String oldEmail);
+
+    void deleteByUsername(String username);
 }

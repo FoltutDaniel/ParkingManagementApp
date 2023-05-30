@@ -9,10 +9,10 @@
             </p>
             <div class="start-date">
                 <label class="start-date-label" for="start-date">Start date:</label>
-                <input class="start-date-picker" type="date" name="start-date" id="start-date" [value]="startDate | date:'yyyy-MM-dd'">
+                <input class="start-date-picker" type="date" name="start-date" id="start-date" [attr.data-cy]="'SUB-START-DATE-DP'" [value]="startDate | date:'yyyy-MM-dd'">
             </div>
             <label for="car">Select car for subscription: </label>
-            <select name="car" id="car" class="car-plate-dropdown">
+            <select name="car" id="car" class="car-plate-dropdown" [attr.data-cy]="'SUB-CAR-SL'">
                 <option *ngFor="let plate of numberPlates" value="{{plate}}">
                     {{plate}}
                 </option>
@@ -21,14 +21,14 @@
                 </option>
             </select>
         </div>
-        
+
     </div>
 </div>
 <div class="confirm-container">
     <p class="price">
         Price: {{subscriptionPrice}} lei
     </p>
-    <button class="confirm-subscription-btn" (click)="purchaseSubscription()">
+    <button class="confirm-subscription-btn" [attr.data-cy]="'CONFIRM-BTN'" (click)="purchaseSubscription()">
         Confirm
     </button>
 </div>

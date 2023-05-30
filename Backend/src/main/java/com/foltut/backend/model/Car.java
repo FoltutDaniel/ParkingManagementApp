@@ -1,10 +1,11 @@
 package com.foltut.backend.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "car")
-public class Car {
+public class Car implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +22,7 @@ public class Car {
     private String brand;
 
     @OneToOne
-    @JoinColumn(name = "subscription_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "subscription_id", referencedColumnName = "id")
     private Subscription subscription;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -45,10 +46,6 @@ public class Car {
         return brand;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public Subscription getSubscription() {
         return subscription;
     }
@@ -67,10 +64,6 @@ public class Car {
 
     public User getOwner() {
         return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 
     public Long getId() {

@@ -14,10 +14,13 @@
             Parking Lot: {{parkingLotName}}
         </div>
 
-        <div class="subscription" *ngIf="noSubscription == false">
+        <div class="subscription" *ngIf="noSubscription == false && car.subscriptionDTO.price !== 10" [attr.data-cy]="'AVAILABLE-SUB'">
             Subscription expiration date: {{car.subscriptionDTO.endDate}}
         </div>
-        <div class="subscription" *ngIf="noSubscription == true">
+      <div class="subscription" *ngIf="noSubscription == false && car.subscriptionDTO.price === 10" [attr.data-cy]="'AVAILABLE-TICKET'">
+        Ticket expiration date: {{car.subscriptionDTO.endDate}}
+      </div>
+        <div class="subscription" *ngIf="noSubscription == true" [attr.data-cy]="'NO-AVAILABLE-SUB'">
             No subscription found for this car.
         </div>
     </div>

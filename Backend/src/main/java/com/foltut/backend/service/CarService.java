@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class CarService {
 
+    public static final String USER_ID = "User id";
     @Autowired
     private CarRepository carRepository;
 
@@ -32,63 +33,63 @@ public class CarService {
     @Autowired
     private HistoryService historyService;
 
-    @Autowired UserService userService;
-
-        public Long registerCar(CarRegisterDTO carRegisterDTO){
+    public Long registerCar(CarRegisterDTO carRegisterDTO) {
 
         Optional<User> carOwner = userRepository.findById(carRegisterDTO.getOwnerId());
+        if (carOwner.isEmpty()) {
+            throw new ResourceNotFoundException("User", USER_ID, carRegisterDTO.getOwnerId());
+        }
+        Car newCar = new Car(carRegisterDTO.getLicensePlate(),
+                carRegisterDTO.getBrand().toLowerCase(Locale.ROOT),
+                carOwner.get());
 
-            Car newCar = new Car(carRegisterDTO.getLicensePlate(),
-                    carRegisterDTO.getBrand().toLowerCase(Locale.ROOT),
-                    carOwner.get());
+        newCar.setParkingStatus(false);
+        carRepository.save(newCar);
 
-            newCar.setParkingStatus(false);
-            carRepository.save(newCar);
+        String information = String.format("User %s registered a new car with license plate: %s", carOwner.get().getUsername(), newCar.getLicensePlate());
+        History newHistory = new History(carOwner.get(), information, Opperation.REGISTER_CAR);
+        historyService.createHistory(newHistory);
 
-            String information = String.format("User %s registered a new car with license plate: %s", carOwner.get().getUsername(), newCar.getLicensePlate());
-            History newHistory = new History(carOwner.get(), information, Opperation.REGISTER_CAR);
+        return newCar.getId();
+
+    }
+
+    public Long removeCar(String licensePlate) {
+
+        Optional<Car> carToRemove = carRepository.findByLicensePlate(licensePlate);
+        if (!carToRemove.isPresent()) {
+            throw new ResourceNotFoundException("Car", "Car license plate", licensePlate);
+        } else {
+            carRepository.delete(carToRemove.get());
+
+            String information = String.format("User %s removed car with license plate: %s", carToRemove.get().getOwner().getUsername(), licensePlate);
+            History newHistory = new History(carToRemove.get().getOwner(), information, Opperation.REMOVE_CAR);
             historyService.createHistory(newHistory);
 
-            return  newCar.getId();
-
+            return carToRemove.get().getId();
+        }
     }
 
-    public Long removeCar(String licensePlate){
-
-            Optional<Car> carToRemove = carRepository.findByLicensePlate(licensePlate);
-            if(!carToRemove.isPresent()){
-                throw new ResourceNotFoundException("Car", "Car license plate", licensePlate);
-            }else{
-                carRepository.delete(carToRemove.get());
-
-                String information = String.format("User %s removed car with license plate: %s", carToRemove.get().getOwner().getUsername(), licensePlate);
-                History newHistory = new History(carToRemove.get().getOwner(), information, Opperation.REMOVE_CAR);
-                historyService.createHistory(newHistory);
-
-                return carToRemove.get().getId();
-            }
-    }
-
-    public List<CarDTO> getAllCarsForUser(Long userId){
-
-            Optional<User> user = userRepository.findById(userId);
-            if(!user.isPresent()){
-                throw new ResourceNotFoundException("User", "User id", userId);
-            }else{
-                return user.get()
-                        .getCars()
-                        .stream()
-                        .map(CarBuilder::generateDTOFromEntity)
-                        .collect(Collectors.toList());
-            }
-    }
-
-    public List<String> getOwnedCarsNumberPlates(Long userId){
+    public List<CarDTO> getAllCarsForUser(Long userId) {
 
         Optional<User> user = userRepository.findById(userId);
-        if(!user.isPresent()){
-            throw new ResourceNotFoundException("User", "User id", userId);
-        }else{
+        if (!user.isPresent()) {
+            throw new ResourceNotFoundException("User", USER_ID, userId);
+        } else {
+            return user.get()
+                    .getCars()
+                    .stream()
+                    .map(CarBuilder::generateDTOFromEntity)
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public List<String> getOwnedCarsNumberPlates(Long userId) {
+
+        Optional<User> user = userRepository.findById(userId);
+        if (!user.isPresent()) {
+            throw new ResourceNotFoundException("User", USER_ID, userId);
+        } else {
             return user.get()
                     .getCars()
                     .stream()
@@ -99,12 +100,12 @@ public class CarService {
 
     }
 
-    public List<String> getCarsWithSubscription(Long userId){
+    public List<String> getCarsWithSubscription(Long userId) {
 
         Optional<User> user = userRepository.findById(userId);
-        if(!user.isPresent()){
-            throw new ResourceNotFoundException("User", "User id", userId);
-        }else{
+        if (!user.isPresent()) {
+            throw new ResourceNotFoundException("User", USER_ID, userId);
+        } else {
             return user.get()
                     .getCars()
                     .stream()

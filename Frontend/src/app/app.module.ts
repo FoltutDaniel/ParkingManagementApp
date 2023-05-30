@@ -36,6 +36,7 @@ import { ConfirmSubscriptionComponent } from './components/confirm-subscription/
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { CancelSubscriptionComponent } from './components/cancel-subscription/cancel-subscription.component';
 import { AddParkComponent } from './components/add-park/add-park.component';
+import { TicketComponent } from './components/ticket/ticket.component';
 
 const material = [
   MatSidenavModule,
@@ -63,7 +64,8 @@ const material = [
     ChangeEmailComponent,
     ConfirmSubscriptionComponent,
     CancelSubscriptionComponent,
-    AddParkComponent
+    AddParkComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,

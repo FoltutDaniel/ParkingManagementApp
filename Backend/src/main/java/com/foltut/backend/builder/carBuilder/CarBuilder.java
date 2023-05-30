@@ -7,15 +7,15 @@ import com.foltut.backend.model.Car;
 
 public class CarBuilder {
 
-    public static CarDTO generateDTOFromEntity(Car car)
-    {
-        return new CarDTO(
-                car.getId(),
-                car.getLicensePlate(),
-                car.getBrand(),
-                car.getParkingStatus(),
-                SubscriptionBuilder.generateDTOFromEntity(car.getSubscription()),
-                ParkingLotBuilder.generateDTOFromEntity(car.getParkingLot())
-        );
+    public static CarDTO generateDTOFromEntity(Car car) {
+        return CarDTO.builder()
+                .id(car.getId())
+                .licensePlate(car.getLicensePlate())
+                .brand(car.getBrand())
+                .parkingStatus(car.getParkingStatus())
+                .subscriptionDTO(SubscriptionBuilder.generateDTOFromEntity(car.getSubscription()))
+                .parkingLotDTO(ParkingLotBuilder.generateDTOFromEntity(car.getParkingLot()))
+                .build();
+
     }
 }

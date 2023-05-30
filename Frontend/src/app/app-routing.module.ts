@@ -16,6 +16,7 @@ import { SettingsViewComponent } from './components/settings-view/settings-view.
 import { SubscriptionViewComponent } from './components/subscription-view/subscription-view.component';
 import { AuthGuard } from './guards/auth.guard';
 import {AddParkComponent} from "./components/add-park/add-park.component";
+import {TicketComponent} from "./components/ticket/ticket.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
   { path: 'confirm-subscription', component: ConfirmSubscriptionComponent, canActivate: [AuthGuard]},
   { path: 'cancel-subscription', component: CancelSubscriptionComponent, canActivate: [AuthGuard]},
-  { path: 'add-park', component: AddParkComponent, canActivate: [AuthGuard]}
+  { path: 'add-park', component: AddParkComponent, canActivate: [AuthGuard]},
+  {path: 'ticket', component: TicketComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

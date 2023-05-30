@@ -1,20 +1,27 @@
 <div class="grid-container">
-    <div class="sidebar">
-      <button (click)="toggleSideNav()"><i class="fa-solid fa-bars nav-icon"></i></button>
-      <p class="user" [hidden]="toggled"><i class="fa-solid fa-user"></i> {{username}}</p>
-      <ul id="nav-options-list">
-        <li class="nav-option"><a routerLink="/"><i class="fa-solid fa-house nav-icon"></i><span [hidden]="toggled"> Home</span></a></li>
-        <li class="nav-option"><a routerLink="/parking-view"><i class="fa-solid fa-square-parking nav-icon"></i><span [hidden]="toggled"> Parking</span></a></li>
-        <li class="nav-option"><a routerLink="/subscription-view"><i class="fa-solid fa-suitcase nav-icon"></i><span [hidden]="toggled"> Subscriptions</span></a></li>
-        <li class="nav-option"><a routerLink="/manage-account-view"><i class="fa-solid fa-bars-progress nav-icon"></i><span [hidden]="toggled"> Manage Account</span></a></li>
-        <li class="nav-option"><a routerLink="/settings-view"><i class="fa-solid fa-gear nav-icon"></i><span [hidden]="toggled"> Settings</span></a></li>
-        <li class="nav-option" (click)="logout()"><i class="fa-solid fa-right-from-bracket nav-icon"></i><span [hidden]="toggled"> Logout</span></li>
-        
-        
+  <div class="sidebar">
+    <button (click)="toggleSideNav()"><i class="fa-solid fa-bars nav-icon"></i></button>
+    <p class="user" [hidden]="toggled"><i class="fa-solid fa-user"></i> {{username}}</p>
+    <ul id="nav-options-list">
+      <li class="nav-option"><a routerLink="/"><i class="fa-solid fa-house nav-icon"></i><span
+        [hidden]="toggled"> Home</span></a></li>
+      <li class="nav-option" [attr.data-cy]="'PARKING-BTN'"><a routerLink="/parking-view"><i class="fa-solid fa-square-parking nav-icon"></i><span
+        [hidden]="toggled"> Parking</span></a></li>
+      <li class="nav-option" [attr.data-cy]="'SUBSCRIPTION-BTN'"><a routerLink="/subscription-view"><i class="fa-solid fa-suitcase nav-icon"></i><span
+        [hidden]="toggled"> Subscriptions</span></a></li>
+      <li class="nav-option"><a routerLink="/ticket"><i  [attr.data-cy]="'TICKET-BTN'" class="fa-sharp fa-solid fa-ticket nav-icon"></i><span
+        [hidden]="toggled"> Tickets</span></a></li>
+      <li class="nav-option" [attr.data-cy]="'MANAGE-ACCOUNT-BTN'"><a routerLink="/manage-account-view"><i
+        class="fa-solid fa-bars-progress nav-icon"></i><span [hidden]="toggled"> Manage Account</span></a></li>
+      <li class="nav-option" ><a routerLink="/settings-view"><i  [attr.data-cy]="'SETTINGS-BTN'" class="fa-solid fa-gear nav-icon"></i><span
+        [hidden]="toggled"> Settings</span></a></li>
+      <li class="nav-option" (click)="logout()" [attr.data-cy]="'LOGOUT-BTN'"><i class="fa-solid fa-right-from-bracket nav-icon"></i><span
+        [hidden]="toggled"> Logout</span></li>
 
-      </ul>
-    </div>
-    <div class="main-content">
-      <router-outlet></router-outlet>
-    </div>
+
+    </ul>
   </div>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

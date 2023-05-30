@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
@@ -28,7 +29,7 @@ class CarServiceTest {
     private CarRepository carRepository;
 
     @BeforeEach
-    public void setupData(){
+    public void setupData() {
         jdbcTemplate.execute("insert into user_table(id, username, first_name, last_name, email, password)" +
                 " values(5, 'UserTest', 'User', 'Test', 'test@mail.com', 'password')");
         jdbcTemplate.execute("INSERT INTO car (`id`, `brand`, `license_plate`, `parking_status`, `user_id`) " +
@@ -36,13 +37,17 @@ class CarServiceTest {
     }
 
     @AfterEach
-    public void destroyData(){
-            jdbcTemplate.execute("DELETE FROM user_table");
+    public void destroyData() {
+        jdbcTemplate.execute("DELETE FROM user_table");
     }
 
     @Test
     void registerCar() {
-        carService.registerCar(new CarRegisterDTO("BH112JCC", "AUDI", 5l));
+        carService.registerCar(CarRegisterDTO.builder()
+                .licensePlate("BH112JCC")
+                .brand("AUDI")
+                .ownerId(5l)
+                .build());
 
         Optional<Car> car = carRepository.findByLicensePlate("BH112JCC");
 

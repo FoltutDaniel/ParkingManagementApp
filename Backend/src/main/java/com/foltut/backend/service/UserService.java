@@ -25,8 +25,6 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -35,15 +33,15 @@ public class UserService {
 
     public User registerUser (UserRegisterDTO userRegisterDTO){
         User newUser = UserRegisterBuilder.generateEntityFromDto(userRegisterDTO);
-//        try{
+        try{
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
             //Username has to be unique (exception)
             newUser.setUsername(newUser.getUsername());
             return userRepository.save(newUser);
 
-//        }catch (Exception e){
-//            throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
-//        }
+        }catch (Exception e){
+            throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
+        }
 
     }
 
@@ -75,6 +73,17 @@ public class UserService {
             return userRepository.findByUsername(username).get();
         }
 
+    }
+
+    public void deleteUserByUsername(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails)principal).getUsername();
+            userRepository.deleteByUsername(username);
+        } else {
+            String username = principal.toString();
+            userRepository.deleteByUsername(username);
+        }
     }
 
 

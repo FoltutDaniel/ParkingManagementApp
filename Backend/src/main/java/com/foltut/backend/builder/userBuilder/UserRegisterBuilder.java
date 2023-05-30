@@ -5,13 +5,12 @@ import com.foltut.backend.model.User;
 
 public class UserRegisterBuilder {
 
-    public static User generateEntityFromDto(UserRegisterDTO userRegisterDTO){
-        return new User(
-                userRegisterDTO.getUsername(),
-                userRegisterDTO.getFirstName(),
-                userRegisterDTO.getLastName(),
-                userRegisterDTO.getEmail(),
-                userRegisterDTO.getPassword()
-        );
+    public static User generateEntityFromDto(UserRegisterDTO userRegisterDTO) {
+        return User.builder().username(userRegisterDTO.getUsername())
+                .firstName(userRegisterDTO.getFirstName())
+                .lastName(userRegisterDTO.getLastName())
+                .email(userRegisterDTO.getEmail())
+                .password(userRegisterDTO.getPassword())
+                .build();
     }
 }

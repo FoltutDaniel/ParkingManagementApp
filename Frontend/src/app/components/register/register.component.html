@@ -1,13 +1,13 @@
 <form class="form-container" [formGroup]="registerForm" (ngSubmit)="register()">
     <img class="app-logo" src="assets/images/logo.png">
     <div class="login-input-container">
-        <label class="login-label" for="username">Username  </label>
+        <label class="login-label" for="username">Username </label>
         <ng-container *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)" >
           <small *ngIf="registerForm.controls['username'].errors.required" class="alert-danger" style="margin-left: 10px">
             Username is required.
           </small>
         </ng-container>
-        <input class="login-input" name="username" type="text" formControlName="username"  placeholder="Enter username">
+        <input class="login-input" name="username" type="text" formControlName="username"  placeholder="Enter username" [attr.data-cy]="'USERNAME'">
     </div>
     <div class="login-input-container">
         <label class="login-label" for="firstName">First Name</label>
@@ -16,7 +16,7 @@
             First name is required.
           </small>
         </ng-container>
-        <input class="login-input" name="firstName" type="text" formControlName="firstName"  placeholder="Enter first name">
+        <input class="login-input" name="firstName" type="text" formControlName="firstName"  placeholder="Enter first name" [attr.data-cy]="'FIRST_NAME'">
     </div>
     <div class="login-input-container">
         <label class="login-label" for="lastName">Last Name</label>
@@ -25,7 +25,7 @@
             Last name is required.
           </small>
         </ng-container>
-        <input class="login-input" name="lastName" type="text" formControlName="lastName"  placeholder="Enter last name">
+        <input class="login-input" name="lastName" type="text" formControlName="lastName"  placeholder="Enter last name" [attr.data-cy]="'LAST_NAME'">
     </div>
     <div class="login-input-container">
         <label class="login-label" for="email">Email</label>
@@ -37,7 +37,7 @@
             Invalid email.
           </small>
         </ng-container>
-        <input class="login-input" name="email" type="text" formControlName="email"  placeholder="Enter email">
+        <input class="login-input" name="email" type="text" formControlName="email"  placeholder="Enter email" [attr.data-cy]="'EMAIL'">
     </div>
     <div class="login-input-container">
         <label class="login-label" for="password">Password</label>
@@ -49,7 +49,7 @@
             Password length should be > 6 characters.
           </small>
         </ng-container>
-        <input class="login-input" name="password" type="password" formControlName="password" placeholder="Enter password">
+        <input class="login-input" name="password" type="password" formControlName="password" placeholder="Enter password" [attr.data-cy]="'PASSWORD'">
     </div>
-    <button  class="login-button" type="submit" [disabled]="registerForm.invalid">Sign up</button>
+    <button  class="login-button" type="submit" [disabled]="registerForm.invalid" [attr.data-cy]="'SIGN-UP-BTN'">Sign up</button>
 </form>
