@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required])
   });
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -44,8 +44,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    let registerData: RegisterData = new RegisterData();
-    registerData = this.registerForm.value;
+    let registerData : RegisterData = this.registerForm.value;
 
     this.authService.register(registerData).subscribe(
       (res)=>{

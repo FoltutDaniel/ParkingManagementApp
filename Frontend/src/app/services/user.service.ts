@@ -12,7 +12,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  changeEmail(changeEmailRequest: ChangeEmailRequest): Promise<boolean>{
+  changeEmail(changeEmailRequest: any): Promise<boolean>{
     return this.http.post<boolean>(this.baseUrl + '/changeEmail', changeEmailRequest).toPromise();
   }
 

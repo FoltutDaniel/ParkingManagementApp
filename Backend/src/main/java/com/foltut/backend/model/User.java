@@ -18,6 +18,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
+@RequiredArgsConstructor
 @Builder
 @Table(name = "user_table")
 public class User implements UserDetails, Serializable {
@@ -51,6 +52,18 @@ public class User implements UserDetails, Serializable {
 
     @OneToMany(mappedBy = "subscriptionUser", cascade = CascadeType.REMOVE)
     private List<Subscription> subscriptions;
+
+    public User(Long id, String username, String firstName, String lastName, String email, String password, UserRole userRole, List<Car> cars, List<Subscription> subscriptions) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userRole = userRole;
+        this.cars = cars;
+        this.subscriptions = subscriptions;
+    }
 
 
     @Override

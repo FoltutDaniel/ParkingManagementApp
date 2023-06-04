@@ -1,4 +1,4 @@
-export class LoginData {
-    username!: String;
-    password!: String;
+export interface LoginData {
+    username?: string;
+    password?: string;
 }

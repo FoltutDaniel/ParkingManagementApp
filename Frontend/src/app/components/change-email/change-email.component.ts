@@ -23,7 +23,7 @@ export class ChangeEmailComponent implements OnInit {
   }
 
   getData(){
-    let changeEmailRequest: ChangeEmailRequest = this.changeEmailForm.value;
+    let changeEmailRequest = this.changeEmailForm.value;
     this.userService.changeEmail(changeEmailRequest).then(
       (res)=>{
         if(res == true){

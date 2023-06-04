@@ -3,6 +3,7 @@
   "include": ["**/*.ts"],
   "compilerOptions": {
     "sourceMap": false,
+    "strictNullChecks": false,
     "types": ["cypress"]
   }
 }

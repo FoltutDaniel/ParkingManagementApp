@@ -24,8 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    let loginData: LoginData = new LoginData();
-    loginData = this.loginForm.value;
+    let loginData = this.loginForm.value;
     this.authService.login(loginData).subscribe(
       (res)=>{
         this.router.navigateByUrl('/home').then(
