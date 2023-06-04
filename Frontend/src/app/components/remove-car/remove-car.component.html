@@ -1,0 +1,15 @@
+<form class="container" (ngSubmit)="getData()">
+    <h2 class="title">Remove car</h2>
+    <div class="input-container">
+    <label for="plate">Number plate: </label>
+        <select name="plate" id="plate" [attr.data-cy]="'REMOVE-CAR-SL'">
+            <option *ngFor="let plate of numberPlates" value="{{plate}}">
+                {{plate}}
+            </option>
+            <option disabled selected *ngIf="numberPlates.length < 1">
+                No cars without a subscription.
+            </option>
+        </select>
+    </div>
+    <button class="confirm-btn" type="submit" [attr.data-cy]="'CONFIRM-BTN'">Confirm</button>
+</form>

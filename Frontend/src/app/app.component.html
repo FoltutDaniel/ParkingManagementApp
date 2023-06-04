@@ -1,3 +1,4 @@
 <div class="page-container">
-    <router-outlet></router-outlet>
+    <side-menu *ngIf="router.url != '/login' && router.url != '/register'"></side-menu>
+    <router-outlet *ngIf="router.url == '/login' || router.url == '/register'"></router-outlet>
 </div>

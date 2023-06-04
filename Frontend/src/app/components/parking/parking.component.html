@@ -1,0 +1,15 @@
+<div class="parking" style="background-color: {{color}};">
+    <h2 class="parking-name">{{parkingLot.name}}</h2>
+    <p class="parking-address">Address: {{parkingLot.address}}</p>
+    <p class="parking-address">Max Capacity: {{parkingLot.maxCapacity}}</p>
+    <p class="parking-capacity" style="font-size: 1.5em;">Remaining parking spots: {{parkingSpots}}</p>
+    <div class="map-container">
+        <app-map id="{{parkingLot.id}}" [Id]=parkingLot.id [latitude]=parkingLot.latitude [longitutde]=parkingLot.longitude>
+
+        </app-map>
+    </div>
+</div>
+
+<script>
+    
+</script>

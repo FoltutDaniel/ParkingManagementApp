@@ -1,0 +1,34 @@
+<div class="data-container">
+    <div class="subscription">
+        <div class="subscription-info">
+            <h2 class="subscription-title">
+                Parking subscription
+            </h2>
+            <p class="subscription-period">
+                Subscription period: {{subscriptionPeriod}} months
+            </p>
+            <div class="start-date">
+                <label class="start-date-label" for="start-date">Start date:</label>
+                <input class="start-date-picker" type="date" name="start-date" id="start-date" [attr.data-cy]="'SUB-START-DATE-DP'" [value]="startDate | date:'yyyy-MM-dd'">
+            </div>
+            <label for="car">Select car for subscription: </label>
+            <select name="car" id="car" class="car-plate-dropdown" [attr.data-cy]="'SUB-CAR-SL'">
+                <option *ngFor="let plate of numberPlates" value="{{plate}}">
+                    {{plate}}
+                </option>
+                <option disabled selected *ngIf="numberPlates.length < 1">
+                    No cars without a subscription.
+                </option>
+            </select>
+        </div>
+
+    </div>
+</div>
+<div class="confirm-container">
+    <p class="price">
+        Price: {{subscriptionPrice}} lei
+    </p>
+    <button class="confirm-subscription-btn" [attr.data-cy]="'CONFIRM-BTN'" (click)="purchaseSubscription()">
+        Confirm
+    </button>
+</div>

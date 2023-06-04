@@ -1,0 +1,16 @@
+<form class="container" (ngSubmit)="getData()">
+    <h1 class="title">Add car</h1>
+    <div class="input-container">
+        <label for="plate">Number plate: </label>
+        <input type="text" name="plate" id="plate" [attr.data-cy]="'NUMBER-PLATE-IN'">
+    </div>
+    <div class="input-container">
+    <label for="brand">Brand: </label>
+        <select name="brand" id="brand" [attr.data-cy]="'BRAND-SL'">
+            <option *ngFor="let brand of carBrands" value="{{brand}}">
+                {{brand}}
+            </option>
+        </select>
+    </div>
+    <button class="confirm-btn" type="submit" [attr.data-cy]="'CONFIRM-BTN'">Confirm</button>
+</form>

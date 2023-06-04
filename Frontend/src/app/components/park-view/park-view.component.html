@@ -1,0 +1,4 @@
+<div class="container">
+    <button class="add-parking-btn" routerLink="/add-park" *ngIf="admin">Add parking</button>
+    <app-parking *ngFor="let parking of parkingLots" id='{{parking.id}}' [parkingLot]=parking></app-parking>
+</div>

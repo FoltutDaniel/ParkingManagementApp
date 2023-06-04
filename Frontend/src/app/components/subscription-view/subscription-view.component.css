@@ -1,0 +1,72 @@
+.container{
+    position: relative;
+
+    display: flex;
+    
+
+    margin-top: 15%;
+    background-color: #5865f2;
+    border-radius: 5px;
+    color: white;
+
+    height: 53%;
+    width: 70%;
+    padding: 0;
+
+}
+
+.plan{
+    position: relative;
+
+    padding: 0;
+    margin: 0;
+    width: 25%;
+    border-left: 1px solid white;
+}
+
+.title{
+    text-align: center;
+    width: 100%;
+    border-radius: 5px;
+    border-bottom: 1px solid white;
+    
+    background-color: black;
+}
+
+.plan:first-of-type{
+    border-left: none
+}
+
+.confirm{
+    position: absolute;
+    border: none;
+    background-color: black;
+    border-radius: 5px;
+
+    width: 60%;
+    height: 10%;
+
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, -50%);
+
+
+    color: white;
+
+}
+
+.confirm:hover{
+    background-color: #2f3136;
+}
+
+.price{
+    text-align: center;
+}
+
+.description{
+    text-align: center;
+    font-size: 1.2em;
+
+    margin-top: 20%;
+    margin-bottom: 40%;
+}

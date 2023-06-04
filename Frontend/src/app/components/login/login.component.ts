@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginData } from 'src/app/common/login-data';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,24 +12,29 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl('')
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
-  
+
+  bannerDisabled: boolean = true;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    let loginData: LoginData = new LoginData();
-    loginData = this.loginForm.value;
+    let loginData = this.loginForm.value;
     this.authService.login(loginData).subscribe(
       (res)=>{
-        this.router.navigateByUrl('/main');
+        this.router.navigateByUrl('/home').then(
+          () => {
+            window.location.reload();
+          }
+        );
       },
       (err)=>{
-        alert(`Login failed`);
+        this.bannerDisabled = false;
       }
     );
   }

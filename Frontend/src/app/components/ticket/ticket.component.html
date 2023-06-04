@@ -1,0 +1,31 @@
+<div class="data-container">
+  <div class="subscription">
+    <div class="subscription-info">
+      <h2 class="subscription-title">
+        Parking ticket
+      </h2>
+      <p class="subscription-period">
+        Ticket is available for: 1 day
+      </p>
+      <label for="car">Select car for ticket purchase: </label>
+      <select name="car" id="car" class="car-plate-dropdown" [attr.data-cy]="'SUB-CAR-SL'">
+        <option *ngFor="let plate of numberPlates" value="{{plate}}">
+          {{plate}}
+        </option>
+        <option disabled selected *ngIf="numberPlates.length < 1">
+          No cars without a subscription/ticket.
+        </option>
+      </select>
+      <div class="confirm-container">
+        <p class="price">
+          Price: 10 lei
+        </p>
+        <button class="confirm-subscription-btn" [attr.data-cy]="'CONFIRM-BTN'" (click)="purchaseSubscription()">
+          Confirm
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

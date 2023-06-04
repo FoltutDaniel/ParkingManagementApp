@@ -1,16 +1,27 @@
 package com.foltut.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.foltut.backend.enums.UserRole;
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "user")
-public class User implements UserDetails {
+@Getter
+@Setter
+@RequiredArgsConstructor
+@Builder
+@Table(name = "user_table")
+public class User implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,75 +43,33 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "owner")
+    @Enumerated(EnumType.ORDINAL)
+    private UserRole userRole;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Car> cars;
 
-    @OneToMany(mappedBy = "subscriptionUser")
+    @OneToMany(mappedBy = "subscriptionUser", cascade = CascadeType.REMOVE)
     private List<Subscription> subscriptions;
 
-    public User() {
-    }
-
-    public User(String username, String firstName, String lastName, String email, String password) {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public User(Long id, String username, String firstName, String lastName, String email, String password, UserRole userRole, List<Car> cars, List<Subscription> subscriptions) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
+        this.userRole = userRole;
+        this.cars = cars;
+        this.subscriptions = subscriptions;
     }
+
 
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
