@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class SubscriptionServiceTest {
 
     @Autowired
@@ -48,6 +50,7 @@ class SubscriptionServiceTest {
 
     @AfterEach
     public void destroyData(){
+        jdbcTemplate.execute("DELETE FROM history");
         jdbcTemplate.execute("DELETE FROM user_table;");
     }
 
